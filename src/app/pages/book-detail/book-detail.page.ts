@@ -27,6 +27,7 @@ export class BookDetailPage implements OnInit {
 
     ngOnInit() {
         this.book = JSON.parse(localStorage.getItem('book'));
+        console.log('---book--', this.book);
     }
 
     async moreOptions() {

@@ -1,6 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable, BehaviorSubject} from 'rxjs';
 import * as firebase from 'firebase';
+import {UserService} from './user.service';
+import {UtilsService} from './utils.service';
+import {NavController} from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -132,10 +135,45 @@ export class DataCollectorService {
         'Yazman',
         'Zafarwal',
     ];
+    users = [];
+    user;
 
-    constructor() {
+    constructor(public service: UserService,
+                public utils: UtilsService,
+                public navCtrl: NavController) {
         this.collection = new BehaviorSubject<any>('data');
         this.getAllBooks();
+    }
+
+    syncUserBlock(uid, isLogin) {
+        firebase.database().ref(`users/${uid}`).on('value', snapshot => {
+            const user = snapshot.val();
+            if (user.isActive) {
+                this.user = this.service.getUser();
+                if (this.user && !isLogin) {
+                    this.navCtrl.navigateForward(['/tabs']);
+                } else if (!this.user && isLogin) {
+                    this.service.setUser(snapshot.val());
+                    this.navCtrl.navigateForward(['/tabs']);
+                } else {
+                    this.navCtrl.navigateRoot(['']);
+                }
+            } else {
+                this.utils.presentToast('Your account have been blocked due to misuse. You can contact us here awais.bsse3352@iiu.edu.pk Thanks');
+                this.service.logOutFromFirebase();
+                this.navCtrl.navigateRoot(['']);
+            }
+        });
+    }
+
+    getAllUsers() {
+        firebase.database().ref('users').on('value', snapshot => {
+            this.books = [];
+            snapshot.forEach((node) => {
+                const user = node.val();
+                this.users.push(user);
+            });
+        });
     }
 
     getAllBooks() {

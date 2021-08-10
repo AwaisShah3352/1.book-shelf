@@ -25,12 +25,13 @@
                             <p>Rs.{{book?.originalCost-book?.deprecatedCost || ""}}</p>
                         </ion-col>
                         <ion-col size="4">
-                            <p class="deprecate">______</p>
+                            <p class="deprecate">_____</p>
                             <p style="position: relative">{{book?.originalCost}}</p>
                         </ion-col>
                     </ion-row>
-                    <p *ngIf="!book.originalCost > 0" style="color: #2dd36f">Free</p>
+                    <p *ngIf="!book.originalCost > 0" style="color: #2dd36f">Rs.0</p>
                     <p>{{book?.city || ""}}</p>
+                    <p>For {{book?.purpose}}</p>
                 </ion-card-header>
             </div>
         </ion-col>

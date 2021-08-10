@@ -35,7 +35,7 @@
                     <ion-label>Purpose</ion-label>
                     <ion-select mode="ios" interface="action-sheet" value="" formControlName="purpose"
                                 placeholder="Type" okText="Okay" cancelText="Dismiss" (ionChange)="typeChanged($event)">
-                        <ion-select-option *ngFor="let type of ['Sell', 'Donate', 'Required']"
+                        <ion-select-option *ngFor="let type of ['Sell', 'Donate', 'Borrow/Req']"
                                            value="{{type}}">{{type}}</ion-select-option>
                     </ion-select>
                 </ion-item>

@@ -21,7 +21,7 @@ export class AddBookPage implements OnInit {
         'Historical Fiction', 'Science Fiction (Sci-Fi)', 'Short Stories', 'Suspense and Thrillers',
         'Women\'s Fiction', 'Cookbooks', 'Detective and Mystery', 'Memoir', 'Biographies/Autobiographies'];
     bookForm: FormGroup;
-    picture: any;
+    picture: any = '';
     user: User;
     uid: string;
     length: number;
@@ -50,14 +50,14 @@ export class AddBookPage implements OnInit {
     formInitializer() {
         this.bookForm = this.formBuilder.group({
             name: [null, [Validators.required]],
-            author: ['', [Validators.required]],
-            publishDate: ['', [Validators.required]],
+            author: [null, [Validators.required]],
+            publishDate: [''],
             type: ['', [Validators.required]],
             picture: [this.picture],
             purpose: [null, [Validators.required]],
             summary: [null, [Validators.required]],
-            originalCost: [null],
-            deprecatedCost: [null]
+            originalCost: [0],
+            deprecatedCost: [0]
         });
         this.setValues();
     }

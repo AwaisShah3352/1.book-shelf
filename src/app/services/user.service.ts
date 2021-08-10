@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user';
 import * as firebase from 'firebase';
+import {LoadingController, NavController} from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-    constructor() {
+    constructor(private loadingCtrl: LoadingController,
+                private navCtrl: NavController) {
         this.user = new User();
         this.loadAllUser();
     }
@@ -15,6 +17,7 @@ export class UserService {
     user: User;
     allUsers: any = [];
 
+    loading: any;
     setUser(user: any) {
         this.user = user;
         localStorage.setItem('user', JSON.stringify(this.user));
@@ -32,6 +35,26 @@ export class UserService {
             snapshot.forEach(node => {
                 this.allUsers.push(node.val());
             });
+        });
+    }
+
+    async logOutFromFirebase() {
+        this.loading = await this.loadingCtrl.create({
+            message: 'please wait...'
+        });
+        this.loading.present();
+        firebase.auth().signOut().then((res) => {
+            localStorage.clear();
+            console.log(localStorage);
+            if (this.loading) {
+                this.loading.dismiss();
+            }
+            this.navCtrl.navigateRoot(['']);
+        }).catch((error) => {
+            alert(error);
+            if (this.loading) {
+                this.loading.dismiss();
+            }
         });
     }
 }

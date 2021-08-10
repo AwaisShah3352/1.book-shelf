@@ -5,6 +5,7 @@ import {LoadingController, NavController} from '@ionic/angular';
 import * as firebase from 'firebase';
 import {UserService} from '../../services/user.service';
 import {UtilsService} from '../../services/utils.service';
+import {DataCollectorService} from '../../services/data-collector.service';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginPage implements OnInit {
                 private service: UserService,
                 private navCtrl: NavController,
                 private utils: UtilsService,
-                private readonly loadingCtrl: LoadingController) {
+                private dataService: DataCollectorService) {
     }
 
     loginForm: FormGroup;
@@ -46,20 +47,12 @@ export class LoginPage implements OnInit {
         firebase.auth().signInWithEmailAndPassword(formData.email, formData.password).then(res => {
             console.log(res);
             if (res.user.emailVerified) {
-                this.saveUser(res.user.uid);
+                this.dataService.syncUserBlock(res.user.uid, true);
             } else {
                 this.utils.presentToast('Please verify your email first.');
             }
         }).catch(error => {
             alert(error);
-        });
-    }
-
-    async saveUser(id) {
-        this.utils.presentLoading('please wait...');
-        firebase.database().ref(`users/${id}`).on('value', snapshot => {
-            this.service.setUser(snapshot.val());
-            this.navCtrl.navigateForward(['/tabs']);
         });
     }
 

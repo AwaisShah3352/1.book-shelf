@@ -40,7 +40,7 @@ export class Tab3Page {
                 }, {
                     text: 'Ok',
                     handler: () => {
-                        this.logOutFromFirebase();
+                        this.service.logOutFromFirebase();
                     }
                 }
             ]
@@ -48,25 +48,7 @@ export class Tab3Page {
         await alert.present();
     }
 
-    async logOutFromFirebase() {
-        this.loading = await this.loadingCtrl.create({
-            message: 'please wait...'
-        });
-        this.loading.present();
-        firebase.auth().signOut().then((res) => {
-            console.log(res);
-            localStorage.clear();
-            if (this.loading) {
-                this.loading.dismiss();
-            }
-            this.navCtrl.navigateRoot(['']);
-        }).catch((error) => {
-            alert(error);
-            if (this.loading) {
-                this.loading.dismiss();
-            }
-        });
-    }
+
 
     async moreOptions() {
         const alert = await this.actionCtrl.create({

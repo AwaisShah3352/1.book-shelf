@@ -47,6 +47,18 @@
               <p style="text-transform: capitalize;"><b>{{book?.publishDate | date:'MMMM d, y'}}</b></p>
             </ion-col>
           </ion-row>
+          <ion-row *ngIf="book.originalCost > 0">
+            <ion-col size="8">
+              <p>Rs.{{book?.originalCost-book?.deprecatedCost || ""}}</p>
+            </ion-col>
+            <ion-col size="4">
+              <p class="deprecate">_____</p>
+              <p style="position: relative">{{book?.originalCost}}</p>
+            </ion-col>
+          </ion-row>
+          <p *ngIf="!book.originalCost > 0" style="color: #2dd36f">Rs.0</p>
+          <p>{{book?.city || ""}}</p>
+          <p>For {{book?.purpose}}</p>
           <ion-row>
             <ion-col size="12">
               <ion-item lines="none" class="item">

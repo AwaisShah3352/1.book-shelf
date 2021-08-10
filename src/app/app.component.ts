@@ -41,11 +41,7 @@ export class AppComponent {
     checkUser() {
         this.user = this.service.getUser();
         if (this.user) {
-            if (this.user.isAdmin) {
-                this.navCtrl.navigateRoot(['/tabs/tab2']);
-            } else {
-                this.navCtrl.navigateRoot(['/tabs/tab1']);
-            }
+            this.dataCollector.syncUserBlock(this.user.uid, false);
         } else {
             this.navCtrl.navigateRoot(['']);
         }
