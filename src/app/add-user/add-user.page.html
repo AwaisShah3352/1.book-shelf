@@ -1,0 +1,47 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button mode="ios" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="addUserForm">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="11">
+        <h3 style="text-align: center">New App User!</h3>
+        <ion-item lines="none" class="itemCont">
+          <ion-input name="fullName" formControlName="fullName" type="text" placeholder="Full Name"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="itemCont">
+          <ion-input name="email" formControlName="email" type="email" placeholder="your@email.com"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="itemCont">
+          <ion-label>Role</ion-label>
+          <ion-select (ionChange)="changeOption($event)" value="" formControlName="role" placeholder="--Select--" okText="Okay" cancelText="Dismiss">
+            <ion-select-option *ngFor="let role of roles" value="{{role}}">{{role}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item lines="none" class="itemCont" *ngIf="isStudent">
+          <ion-input placeholder="Registration No." formControlName="regNo" type="text"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="itemCont">
+          <ion-input placeholder="Password" formControlName="password" [type]="passwordType" clearOnEdit="false"></ion-input>
+          <ion-icon color="primary" item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="itemCont">
+          <ion-input placeholder="Confirm Password" formControlName="confirm_password" [type]="passwordType" clearOnEdit="false"></ion-input>
+          <ion-icon color="primary" item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="itemCont">
+          <ion-input placeholder="Phone Number" formControlName="phone" type="number"></ion-input>
+        </ion-item>
+        <ion-button class="itemCont" [disabled]="!addUserForm.valid" (click)="addUser()"
+                    color="primary" type="submit" expand="block">Add</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

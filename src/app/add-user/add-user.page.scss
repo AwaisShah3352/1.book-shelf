@@ -1,0 +1,90 @@
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-color: #737373;
+  border-radius: 50%;
+  padding-top: 5px;
+}
+
+ion-content {
+  --background: #fafafa;
+  --padding-top: 0em;
+  --padding-bottom: 1em;
+  --color: var(--ion-color-dark);
+
+  .userImg {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .searchBar {
+    border-radius: 10px;
+    margin: 10px 0px 0px 0px;
+    box-shadow: none;
+    --background: white;
+    padding: 0px 0px 0px 0px;
+    --color: #22215B;
+    //min-height: 30vh;
+    min-height: 9vh;
+  }
+  .withdrawCard {
+    border-radius: 15px;
+    margin: 10px 0px 0px 0px;
+    box-shadow: none;
+    --background: white;
+    padding: 0px 0px 0px 0px;
+    --color: #22215B;
+    //min-height: 30vh;
+    min-height: 11vh;
+
+    .inputCont {
+      --min-height: 55px;
+      --background: #FAFAFA;
+      border: 1px solid #e2dfdf;
+      --border-radius: 7px;
+      border-radius: 7px;
+      --padding-start: 15px;
+      --padding-end: 15px;
+      --inner-padding-end: 0px;
+      margin-top: 15px;
+
+      ion-label {
+        margin: 0px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      ion-input {
+        font-size: 14px;
+        --color: #22215B;
+        --padding-end: 0px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+      }
+    }
+  }
+
+  .itemCont {
+    --padding-start: 15px;
+    --padding-end: 15px;
+    --inner-padding-end: 0px;
+    --min-height: 55px;
+    --border-radius: 8px;
+    border-radius: 8px;
+    margin-top: 15px;
+
+    .itemIcon {
+      color: var(--ion-color-primary);
+      font-size: 23px;
+      margin-right: 15px;
+    }
+
+    ion-icon:last-child {
+      margin: 0px 0px 0px 10px;
+      color: #D2D2D2;
+      font-size: 20px;
+    }
+  }
+}

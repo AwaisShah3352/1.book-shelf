@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button mode="ios" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+    <ion-icon (click)="moreOptions()" size="large" name="ellipsis-vertical" slot="end"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="12" class="py-0">
+      <ion-card class="withdrawCard">
+        <ion-img src="{{book?.image || 'assets/books/1.jpeg'}}"></ion-img>
+        <ion-card-header>
+          <ion-card-title style="text-transform: capitalize;"><b>{{book?.name || 'Book Name'}}</b></ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row style="margin: 0px 15px 0px -8px;">
+            <ion-col size="2">
+              <ion-img src="assets/image.png"></ion-img>
+            </ion-col>
+            <ion-col size="8">
+              <h4><b>Muhammad Ahmed</b></h4>
+              <p>+923401111111</p>
+            </ion-col>
+            <ion-col size="2">
+              <ion-icon (click)="openChat(book?.name, book.uid)" size="large" name="mail" color="success"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <ion-button (click)="openEasyPaisa()">EasyPaisa</ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button (click)="openJazzCash()">Jazzcash</ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <p>Author</p>
+              <p style="text-transform: capitalize;"><b>{{book?.author || ''}}</b></p>
+            </ion-col>
+            <ion-col size="6">
+              <p>Date Published</p>
+              <p style="text-transform: capitalize;"><b>{{book?.publishDate | date:'MMMM d, y'}}</b></p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item lines="none" class="item">
+                <p>Summary</p>
+                <ion-icon color="primary" *ngIf="book?.show" (click)="expandCLick()" slot="end"
+                          name="chevron-up-sharp"></ion-icon>
+                <ion-icon color="primary" *ngIf="!book?.show" (click)="expandCLick()" slot="end"
+                          name="chevron-down-sharp"></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="book?.show">
+            <ion-col size="12">
+              <p>{{book?.summary}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

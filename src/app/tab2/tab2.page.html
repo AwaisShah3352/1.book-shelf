@@ -1,0 +1,126 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Books</ion-title>
+        <ion-icon (click)="addBook()" color="primary" name="add-circle" slot="end" size="large"></ion-icon>
+    </ion-toolbar>
+    <ion-toolbar class="toolbar">
+    <ion-segment mode="ios" (ionChange)="segmentChanged($event)" color="primary" value="standard"
+                 swipeGesture="true" class="segment">
+        <ion-segment-button value="standard" layout="icon-start">
+            <ion-label class="button">Required</ion-label>
+            <ion-icon name="laptop"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="hybrid" layout="icon-start">
+            <ion-icon name="newspaper"></ion-icon>
+            <ion-label class="button">Donated</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+<!--        <ion-card class="card searchBar">-->
+<!--            <ion-item lines="none">-->
+<!--                <ion-icon name="search" color="primary" slot="start"></ion-icon>-->
+<!--                <ion-input placeholder="Search book"></ion-input>-->
+<!--                <ion-icon *ngIf="searchText" name="close" color="primary" slot="end"></ion-icon>-->
+<!--            </ion-item>-->
+<!--        </ion-card>-->
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <div *ngIf="required && myRequiredBooks.length>0">
+        <ion-row class="row" *ngFor="let book of myRequiredBooks; index as i">
+            <ion-col size="12">
+                <ion-card class="withdrawCard">
+                    <img class="image" src="{{book?.image || 'assets/books/1.jpeg'}}"/>
+
+                    <ion-row style="margin-top: 10px;">
+                        <ion-col size="11">
+                            <ion-card-title class="title">{{book?.name || 'Book Name'}}</ion-card-title>
+                        </ion-col>
+                        <ion-col size="1">
+                            <ion-icon style="margin: 0px 0px 0px -10px;" (click)="moreOptions(book)" color="primary" size="large" name="ellipsis-vertical"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col size="6">
+                                <p>Author</p>
+                                <p style="text-transform: capitalize;"><b>{{book?.author || ''}}</b></p>
+                            </ion-col>
+                            <ion-col size="6">
+                                <p>Date Published</p>
+                                <p style="text-transform: capitalize;"><b>{{book?.publishDate | date:'MMMM d, y'}}</b></p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="12">
+                                <ion-item lines="none" class="item">
+                                    <p>Summary</p>
+                                    <ion-icon color="primary" *ngIf="book?.show" (click)="expandCLick(book)" slot="end"
+                                              name="chevron-up-sharp"></ion-icon>
+                                    <ion-icon color="primary" *ngIf="!book?.show" (click)="expandCLick(book)" slot="end"
+                                              name="chevron-down-sharp"></ion-icon>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row *ngIf="book?.show">
+                            <ion-col size="12">
+                                <p>{{book?.summary}}</p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </div>
+    <div *ngIf="required && !myRequiredBooks.length>0">
+        <h4 class="no-data">No Required book</h4>
+    </div>
+    <div *ngIf="donated && myDonatedBooks.length>0">
+        <ion-row class="row" *ngFor="let book of myDonatedBooks; index as i">
+            <ion-col size="12">
+                <ion-card style="text-transform: capitalize;" class="withdrawCard">
+                    <img class="image" src="{{book?.image || 'assets/books/1.jpeg'}}"/>
+                    <ion-row style="margin-top: 10px;">
+                        <ion-col size="11">
+                            <ion-card-title class="title">{{book?.name || 'Book Name'}}</ion-card-title>
+                        </ion-col>
+                        <ion-col size="1">
+                            <ion-icon style="margin: 0px 0px 0px -10px;" (click)="moreOptions(book)" color="primary" size="large" name="ellipsis-vertical"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col size="6">
+                                <p>Author</p>
+                                <p style="text-transform: capitalize;"><b>{{book?.author || ''}}</b></p>
+                            </ion-col>
+                            <ion-col size="6">
+                                <p>Date Published</p>
+                                <p style="text-transform: capitalize;"><b>{{book?.publishDate | date:'MMMM d, y'}}</b></p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="12">
+                                <ion-item lines="none" style="margin: -15px;">
+                                    <p>Summary</p>
+                                    <ion-icon color="primary" *ngIf="book?.show" (click)="expandCLick(book)" slot="end"
+                                              name="chevron-up-sharp"></ion-icon>
+                                    <ion-icon color="primary" *ngIf="!book?.show" (click)="expandCLick(book)" slot="end"
+                                              name="chevron-down-sharp"></ion-icon>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row *ngIf="book?.show">
+                            <ion-col size="12">
+                                <p>{{book?.summary}}</p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </div>
+    <div *ngIf="donated && !myDonatedBooks.length>0">
+        <h4 class="no-data">No Donated book</h4>
+    </div>
+</ion-content>

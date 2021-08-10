@@ -1,0 +1,22 @@
+ion-content {
+  --background: #fafafa;
+}
+
+.label {
+  color: black;
+  font-size: 18px;
+}
+
+.card {
+  border-radius: 7px;
+  box-shadow: none;
+  margin: 15px;
+  height: 50px;
+  padding: 15px;
+  background: lightsteelblue;
+}
+
+.row {
+  text-align: center;
+  justify-content: center
+}

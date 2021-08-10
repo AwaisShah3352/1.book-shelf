@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button text=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>Sign Up</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="signupForm">
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="11">
+                <ion-item lines="none" class="itemCont">
+                    <ion-input name="fullName" formControlName="fullName" type="text"
+                               placeholder="Full Name"></ion-input>
+                </ion-item>
+                <ion-item lines="none" class="itemCont">
+                    <ion-input name="email" formControlName="email" type="email"
+                               placeholder="your@email.com"></ion-input>
+                </ion-item>
+                <ion-item lines="none" class="itemCont">
+                    <ion-input placeholder="Phone Number" formControlName="phone" type="number"></ion-input>
+                </ion-item>
+                <ion-item lines="none" class="itemCont">
+                    <ion-input placeholder="Address (optional)" formControlName="address" type="text"></ion-input>
+                </ion-item>
+                <ion-select class="select" placeholder="select city" formControlName="city">
+                    <ion-select-option *ngFor="let city of cities" value="{{city}}">{{city}}</ion-select-option>
+                </ion-select>
+                <ion-item lines="none" class="itemCont">
+                    <ion-input placeholder="Password" formControlName="password" [type]="passwordType"
+                               clearOnEdit="false"></ion-input>
+                    <ion-icon color="primary" item-end [name]="passwordIcon" class="passwordIcon"
+                              (click)='hideShowPassword()'></ion-icon>
+                </ion-item>
+                <ion-item lines="none" class="itemCont">
+                    <ion-input placeholder="Confirm Password" formControlName="confirm_password" [type]="passwordType"
+                               clearOnEdit="false"></ion-input>
+                    <ion-icon color="primary" item-end [name]="passwordIcon" class="passwordIcon"
+                              (click)='hideShowPassword()'></ion-icon>
+                </ion-item>
+                <ion-button class="itemCont" [disabled]="!signupForm.valid" (click)="signUpUser()"
+                            color="primary" type="submit" expand="block">SIGN UP
+                </ion-button>
+                <div style="text-align: center; padding-top: 45px">
+                    <ion-label color="secondary">Already have an account?
+                        <span routerLink="/" style="color: #ab1a3e"><b> <u>Sign In</u></b></span></ion-label>
+                </div>
+            </ion-col>
+        </ion-row>
+    </form>
+</ion-content>

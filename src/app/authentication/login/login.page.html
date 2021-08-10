@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="loginForm">
+        <ion-row class="ion-justify-content-center">
+            <ion-col style="padding-top: 60px" size="11">
+                <ion-item lines="none" class="itemCont">
+                    <ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
+                </ion-item>
+                <ion-item lines="none" class="itemCont">
+                    <ion-input placeholder="Password" formControlName="password" [type]="passwordType"
+                               clearOnEdit="false"></ion-input>
+                    <ion-icon color="primary" item-end [name]="passwordIcon" class="passwordIcon"
+                              (click)='hideShowPassword()'></ion-icon>
+                </ion-item>
+                <div style="text-align: center; padding-top: 15px">
+                    <ion-label (click)="forgotPassword()" color="secondary"><u>Forgot Password?</u></ion-label>
+                </div>
+                <div style="padding-top: 30px"></div>
+                <ion-button class="itemCont" [disabled]="loginForm.invalid" (click)="login()"
+                            color="primary" type="submit" expand="block">SIGN IN</ion-button>
+                <div style="text-align: center; padding-top: 45px">
+                    <ion-label (click)="registerUser()" color="secondary">Don't have an account?
+                        <span style="color: #ab1a3e"><b> <u>Sign up</u></b>
+                    </span></ion-label>
+                </div>
+            </ion-col>
+        </ion-row>
+    </form>
+</ion-content>
+

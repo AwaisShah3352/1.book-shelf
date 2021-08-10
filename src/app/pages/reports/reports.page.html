@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button mode="ios" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reports</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngIf="reports">
+    <ion-col size="12">
+      <ion-card style="border-radius: 10px" *ngFor="let report of reports; index as i">
+        <ion-card-header>
+          <ion-card-title>{{report?.type || 'Spam'}} Report</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <h4>{{report?.email || 'email-text@email.com'}}</h4>
+          <p>{{report?.timestamp | date: 'yyyy-MM-dd'}}</p>
+          <ion-item lines="none" class="ion-no-padding">{{report?.reportMessage}}</ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <div *ngIf="reports.length===0">
+    <h4 class="no-data">No Report</h4>
+  </div>
+</ion-content>

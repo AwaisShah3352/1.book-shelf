@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button mode="ios" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Conversation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="12">
+      <ion-list class="itemCont">
+        <ion-card style="text-transform: capitalize;" *ngFor="let item of channels" class="itemCont">
+          <ion-item lines="none" (click)="openChat(item?.sender)">{{item?.sender}}
+            <ion-icon color="primary" slot="end" name="chevron-forward"></ion-icon>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>

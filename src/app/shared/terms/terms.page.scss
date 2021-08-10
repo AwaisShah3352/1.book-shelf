@@ -1,0 +1,44 @@
+.alignText {
+  //text-align: center;
+  padding-right: 5%;
+  padding-left: 5%;
+}
+.li {
+  padding-left: 10%;
+  padding-right: 5%;
+}
+ion-content {
+  --background: #fafafa;
+  --padding-top: 1.5em;
+  --padding-bottom: 1em;
+  --color: var(--ion-color-dark);
+
+  .userImg {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .itemCont {
+    --padding-start: 15px;
+    --padding-end: 15px;
+    --inner-padding-end: 0px;
+    --min-height: 55px;
+    --border-radius: 8px;
+    border-radius: 8px;
+    margin-top: 15px;
+
+    .itemIcon {
+      color: var(--ion-color-primary);
+      font-size: 23px;
+      margin-right: 15px;
+    }
+
+    ion-icon:last-child {
+      margin: 0px 0px 0px 10px;
+      color: #D2D2D2;
+      font-size: 20px;
+    }
+  }
+}

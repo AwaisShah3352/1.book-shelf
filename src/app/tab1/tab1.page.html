@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Books</ion-title>
+    </ion-toolbar>
+    <ion-toolbar class="toolbar">
+        <ion-card class="searchBar card">
+            <ion-item style="--background: #ededed;" lines="none">
+                <ion-icon name="search" color="primary" slot="start"></ion-icon>
+                <ion-input [(ngModel)]="searchText" (ionChange)="searchBook()" placeholder="Search"></ion-input>
+                <ion-icon (click)="closeSearch()" *ngIf="searchText" name="close" color="primary" slot="end"></ion-icon>
+            </ion-item>
+        </ion-card>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row style="margin: 0px 6px 0px 6px;">
+        <ion-col size="12" class="py-0" *ngFor="let book of searchedBooks; index as i">
+            <div (click)="openDetail(book)" >
+                <img class="image" src="{{book?.image || 'assets/books/1.jpeg'}}"/>
+                <ion-card-header style="padding: 10px;">
+                    <ion-label>{{book?.name || 'Book Name'}}</ion-label>
+                    <ion-row *ngIf="book.originalCost > 0">
+                        <ion-col size="8">
+                            <p>Rs.{{book?.originalCost-book?.deprecatedCost || ""}}</p>
+                        </ion-col>
+                        <ion-col size="4">
+                            <p class="deprecate">______</p>
+                            <p style="position: relative">{{book?.originalCost}}</p>
+                        </ion-col>
+                    </ion-row>
+                    <p *ngIf="!book.originalCost > 0" style="color: #2dd36f">Free</p>
+                    <p>{{book?.city || ""}}</p>
+                </ion-card-header>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-content>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "276175535248",
+    "firebase_url": "https://book-shelf-7341f-default-rtdb.firebaseio.com",
+    "project_id": "book-shelf-7341f",
+    "storage_bucket": "book-shelf-7341f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276175535248:android:d1fd1b997697f1b833ac15",
+        "android_client_info": {
+          "package_name": "com.ionic.bookshelf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276175535248-eicr250qli6otngjeibhq3m765rco1nc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4BkTdrnH47QXSKhLFnkc-rxnhQyJQKWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276175535248-eicr250qli6otngjeibhq3m765rco1nc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

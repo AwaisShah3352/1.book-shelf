@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button text="" mode="ios"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Reviews</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="reviews.length===0">
+  <h4 class="no-data">No Review</h4>
+</ion-content>
+
+<ion-content *ngIf="reviews">
+    <ion-row>
+        <ion-col size="12">
+            <ion-card style="border-radius: 10px" *ngFor="let review of reviews; index as i">
+                <ion-card-header>
+                    <ion-card-title>{{review?.from || 'email@gmail.com'}}</ion-card-title>
+                    <ion-item style="margin: 0px 0px -15px 0px;" class="ion-no-padding" lines="none">
+                        <div *ngFor="let star of [1,2,3,4,5];">
+                            <ion-icon *ngIf="star <= review?.stars" name="star" color="warning"></ion-icon>
+                            <ion-icon *ngIf="star > review?.stars" name="star-outline"></ion-icon>
+                        </div>
+                        {{review?.stars}}
+                    </ion-item>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-item lines="none" class="ion-no-padding">{{review?.feedback}}</ion-item>
+                    <p>{{review?.timestamp | date: 'yyyy-MM-dd'}}</p>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size="12">
+            <ion-card style="border-radius: 10px">
+                <ion-card-header>
+                    <ion-card-title>Total rating is:</ion-card-title>
+                    <ion-item style="margin: 0px 0px -15px 0px;" class="ion-no-padding" lines="none">
+                        <div *ngFor="let star of [1,2,3,4,5];">
+                            <ion-icon *ngIf="star <= totalRating" name="star" color="warning"></ion-icon>
+                            <ion-icon *ngIf="star > totalRating" name="star-outline"></ion-icon>
+                        </div>{{totalRating}}
+                    </ion-item>
+                </ion-card-header>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-content>

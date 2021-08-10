@@ -1,0 +1,23 @@
+<ion-content style="height: 325px; width: 250px;">
+  <form [formGroup]="reviewForm">
+    <ion-grid>
+      <ion-row style="padding-top: 45px;" color="justify-content-center">
+        <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+          <div style="padding: 0px 0px 5px 35px;">
+            <ion-icon size="large" color="{{c1}}" (click)=" clickFirst(1)" name="{{n1}}"></ion-icon>
+            <ion-icon size="large" color="{{c2}}" (click)=" clickSecond(2)" name="{{n2}}"></ion-icon>
+            <ion-icon size="large" color="{{c3}}" (click)=" clickThird(3)" name="{{n3}}"></ion-icon>
+            <ion-icon size="large" color="{{c4}}" (click)=" clickForth(4)" name="{{n4}}"></ion-icon>
+            <ion-icon size="large" color="{{c5}}" (click)=" clickFifth(5)" name="{{n5}}"></ion-icon>
+          </div>
+          <ion-item style="margin: 0px -20px 0px -20px;">
+            <ion-textarea class="textarea" placeholder="Type here..." formControlName="title"></ion-textarea>
+          </ion-item>
+          <div class="ion-padding">
+            <ion-button size="default" (click)="addReview()" color="secondary" expand="block">SUBMIT</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

@@ -1,0 +1,56 @@
+
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Profile</ion-title>
+        <ion-buttons (click)="moreOptions()" slot="end">
+            <img src="assets/more.svg" style="color: #dadada ;height: 23px; width: 23px">
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row class="ion-justify-content-center">
+        <ion-col size="11">
+            <ion-row class="mb-2">
+                <ion-col size="3">
+                    <img src="{{user?.profileImage || '/assets/image.png'}}" class="userImg">
+                </ion-col>
+                <ion-col size="9" class="align-center">
+                    <h3 class="my-0 primary">{{user?.fullName || 'Your Name'}}</h3>
+                    <p class="pt-1 my-0 appTxt">{{user?.email || 'your.mail@gmail.com'}}</p>
+                </ion-col>
+            </ion-row>
+            <ion-item (click)="goToEditProfile()" detail="false" lines="none" class="itemCont">
+                <ion-icon slot="start" class="itemIcon" name="create-outline"></ion-icon>
+                <p class="my-0 font-14">Edit Profile</p>
+                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item (click)="goToNotifications()" detail="false" lines="none" class="itemCont">
+                <ion-icon slot="start" class="itemIcon" name="document-text-outline"></ion-icon>
+                <p class="my-0 font-14">Notifications</p>
+                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item (click)="goToPrivacy()" detail="false" lines="none" class="itemCont">
+                <ion-icon slot="start" class="itemIcon" name="reorder-four"></ion-icon>
+                <p class="my-0 font-14">Privacy Policy</p>
+                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item (click)="goToTerms()" detail="false" lines="none" class="itemCont">
+                <ion-icon slot="start" class="itemIcon" name="newspaper-outline"></ion-icon>
+                <p class="my-0 font-14">Term and Conditions</p>
+                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item (click)="goToContactUs()" detail="false" lines="none" class="itemCont">
+                <ion-icon slot="start" class="itemIcon" name="information-circle"></ion-icon>
+                <p class="my-0 font-14">Contact Us</p>
+                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item (click) = "logOut()" detail="false" lines="none" class="itemCont">
+                <ion-icon slot="start" class="itemIcon" name="log-out-outline"></ion-icon>
+                <p class="my-0 font-14">Log out</p>
+                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+</ion-content>
+

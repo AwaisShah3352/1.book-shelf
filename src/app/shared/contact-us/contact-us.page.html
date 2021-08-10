@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+        <ion-buttons slot="start">
+            <ion-back-button mode="ios" text=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>Contact Us</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+            <form [formGroup]="contactUsForm">
+                <ion-item lines="none" class="itemCont">
+                    <ion-textarea rows="1" formControlName="email"
+                                  placeholder="Email"></ion-textarea>
+                </ion-item>
+                <ion-item lines="none" class="itemCont">
+                    <ion-textarea rows="1" formControlName="subject"
+                                  placeholder="Subject"></ion-textarea>
+                </ion-item>
+                <ion-item lines="none" class="itemCont">
+                    <ion-textarea rows="7" formControlName="message"
+                                  placeholder="Enter message here..."></ion-textarea>
+                </ion-item>
+            </form>
+            <ion-button style="padding-top: 20px; height: 60px" (click)="sendMail()" type="submit" expand="block">Send Message</ion-button>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

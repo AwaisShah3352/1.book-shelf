@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+        <ion-buttons slot="start">
+            <ion-back-button mode="ios" text=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>Edit Profile</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row align-items-end no-padding>
+        <ion-col size="3"></ion-col>
+        <ion-col style="padding-top: 15px" size="6">
+            <div class="profile">
+                <img class="userImg" [src]="user?.profileImage || 'assets/image.png'"/>
+                <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+                    <ion-fab-button color="success" (click)="getPicture()">
+                        <ion-icon name="camera"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+            </div>
+        </ion-col>
+        <ion-col size="3"></ion-col>
+    </ion-row>
+
+    <ion-card class="itemCont">
+        <ion-card>
+            <ion-item lines="none">
+                <div style="padding-right: 10px">
+                    <ion-icon color="primary" slot="start" name="person"></ion-icon>
+                </div>
+                <ion-label>{{user?.fullName}}</ion-label>
+                <ion-icon (click)="getName()" color="primary" slot="end" name="pencil-sharp"></ion-icon>
+            </ion-item>
+        </ion-card>
+        <ion-card>
+            <ion-item lines="none">
+                <div style="padding-right: 10px">
+                    <ion-icon color="primary" slot="start" name="phone-portrait"></ion-icon>
+                </div>
+                <ion-label>{{user?.phone || '+92304444444'}}</ion-label>
+                <ion-icon color="primary" (click)="getPhone()" slot="end" name="pencil-sharp"></ion-icon>
+            </ion-item>
+        </ion-card>
+        <ion-card>
+            <ion-item lines="none">
+                <div style="color: #2dd36f; padding-right: 10px">
+                    <ion-icon color="primary" slot="start" name="mail"></ion-icon>
+                </div>
+                <ion-label>{{user?.email}}</ion-label>
+            </ion-item>
+        </ion-card>
+    </ion-card>
+    <ion-row class="ion-justify-content-center">
+        <ion-col class="itemCont" size="11">
+            <ion-button (click)="updateUser()" expand="block">Save</ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

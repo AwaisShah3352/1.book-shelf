@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Messages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let message of messages">
+      <ion-col size="9" *ngIf="uid !== message?.sender" class="message other-message">
+        <b>{{message?.name}}</b><br>
+        <span>{{message?.message}}</span>
+        <div class="time" text-right><br>
+          {{message.time | date:'short'}}</div>
+      </ion-col>
+
+      <ion-col offset="3" size="9" *ngIf="uid === message.sender" class="message my-message">
+        <b>{{message?.name}}</b><br>
+        <span>{{message?.message}}</span>
+        <div class="time" text-right><br>
+          {{message.time | date:'short'}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-row align-items-end no-padding>
+      <ion-col size="10">
+                <textarea placeholder="Enter your message" autosize [(ngModel)]="newMsg"
+                          class="message-input"></textarea>
+      </ion-col>
+      <ion-col class="send-col" size="2">
+        <ion-icon color="primary" (click)="sendMessage()" name="send" size="large"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
