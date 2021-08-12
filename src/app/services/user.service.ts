@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {User} from '../models/user';
 import * as firebase from 'firebase';
 import {LoadingController, NavController} from '@ionic/angular';
+import {UtilsService} from './utils.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-    constructor(private loadingCtrl: LoadingController,
+    constructor(private utils: UtilsService,
                 private navCtrl: NavController) {
         this.user = new User();
         this.loadAllUser();
@@ -39,10 +40,7 @@ export class UserService {
     }
 
     async logOutFromFirebase() {
-        this.loading = await this.loadingCtrl.create({
-            message: 'please wait...'
-        });
-        this.loading.present();
+        this.utils.presentLoading('Loading...')
         firebase.auth().signOut().then((res) => {
             localStorage.clear();
             console.log(localStorage);

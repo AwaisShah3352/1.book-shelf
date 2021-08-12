@@ -149,15 +149,21 @@ export class DataCollectorService {
         firebase.database().ref(`users/${uid}`).on('value', snapshot => {
             const user = snapshot.val();
             if (user.isActive) {
+                // debugger
+                const cu = firebase.auth().currentUser;
+                console.log('current user is: ', cu);
                 this.user = this.service.getUser();
-                if (this.user && !isLogin) {
+                if (this.user || cu) {
+                    this.service.setUser(user);
                     this.navCtrl.navigateForward(['/tabs']);
-                } else if (!this.user && isLogin) {
-                    this.service.setUser(snapshot.val());
-                    this.navCtrl.navigateForward(['/tabs']);
-                } else {
-                    this.navCtrl.navigateRoot(['']);
                 }
+                // else if (!this.user && cu) {
+                //     this.navCtrl.navigateRoot(['']);
+                //     // this.service.setUser(snapshot.val());
+                //     // this.navCtrl.navigateForward(['/tabs']);
+                // } else {
+                //     // this.navCtrl.navigateRoot(['']);
+                // }
             } else {
                 this.utils.presentToast('Your account have been blocked due to misuse. You can contact us here awais.bsse3352@iiu.edu.pk Thanks');
                 this.service.logOutFromFirebase();
