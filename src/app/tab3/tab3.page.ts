@@ -110,10 +110,6 @@ export class Tab3Page {
         this.navCtrl.navigateForward(['/contact-us']);
     }
 
-    goToNotifications() {
-        this.navCtrl.navigateForward(['/notifications']);
-    }
-
     goToEditProfile() {
         this.navCtrl.navigateForward(['/edit-profile']);
     }

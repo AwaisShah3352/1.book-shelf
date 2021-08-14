@@ -35,10 +35,6 @@ const routes: Routes = [
     loadChildren: () => import('./shared/contact-us/contact-us.module').then( m => m.ContactUsPageModule)
   },
   {
-    path: 'notifications',
-    loadChildren: () => import('./shared/notifications/notifications.module').then( m => m.NotificationsPageModule)
-  },
-  {
     path: 'terms',
     loadChildren: () => import('./shared/terms/terms.module').then( m => m.TermsPageModule)
   },

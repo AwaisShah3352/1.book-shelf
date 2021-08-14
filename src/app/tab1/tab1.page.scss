@@ -6,11 +6,18 @@
   padding-top: 5px;
 }
 
+.line {
+  height: 2px;
+  background: chartreuse;
+  margin-bottom: 23px;
+}
+
 .deprecate {
   height: 2px;
   background: red;
   position: absolute;
-  bottom: 14px; left: 0
+  bottom: 14px;
+  left: 0
 }
 
 .card {
@@ -101,6 +108,7 @@ ion-content {
     --color: #22215B;
     min-height: 11vh;
   }
+
   .itemCont {
     --padding-start: 15px;
     --padding-end: 15px;

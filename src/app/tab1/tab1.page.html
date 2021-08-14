@@ -20,7 +20,7 @@
                 <img class="image" src="{{book?.image || 'assets/books/1.jpeg'}}"/>
                 <ion-card-header style="padding: 10px;">
                     <ion-label>{{book?.name || 'Book Name'}}</ion-label>
-                    <ion-row *ngIf="book.originalCost > 0">
+                    <ion-row *ngIf="book.originalCost > 0 && book.purpose !='Borrow/Req'">
                         <ion-col size="8">
                             <p>Rs.{{book?.originalCost-book?.deprecatedCost || ""}}</p>
                         </ion-col>
@@ -29,11 +29,12 @@
                             <p style="position: relative">{{book?.originalCost}}</p>
                         </ion-col>
                     </ion-row>
-                    <p *ngIf="!book.originalCost > 0" style="color: #2dd36f">Rs.0</p>
+                    <p *ngIf="!book.originalCost > 0 && book.purpose !='Borrow/Req'" style="color: #2dd36f">Free</p>
                     <p>{{book?.city || ""}}</p>
                     <p>For {{book?.purpose}}</p>
                 </ion-card-header>
             </div>
+            <div class="line"></div>
         </ion-col>
     </ion-row>
 </ion-content>
