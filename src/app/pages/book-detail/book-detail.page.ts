@@ -5,6 +5,7 @@ import {RatingComponent} from './rating/rating.component';
 import * as firebase from 'firebase';
 import {ReviewService} from '../../services/review.service';
 import {AppLauncher, AppLauncherOptions} from '@ionic-native/app-launcher/ngx';
+import {DataCollectorService} from '../../services/data-collector.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ import {AppLauncher, AppLauncherOptions} from '@ionic-native/app-launcher/ngx';
 export class BookDetailPage implements OnInit {
 
     book: any;
+    user: any;
 
     constructor(public utils: UtilsService,
                 public actionCtrl: ActionSheetController,
@@ -22,12 +24,17 @@ export class BookDetailPage implements OnInit {
                 private reviewService: ReviewService,
                 private appLauncher: AppLauncher,
                 private platform: Platform,
+                private dataCollector: DataCollectorService,
                 public popoverController: PopoverController) {
     }
 
     ngOnInit() {
         this.book = JSON.parse(localStorage.getItem('book'));
         console.log('---book--', this.book);
+        if (this.book) {
+            this.user = this.dataCollector.getUserById(this.book.uid);
+            console.log(this.user);
+        }
     }
 
     async moreOptions() {

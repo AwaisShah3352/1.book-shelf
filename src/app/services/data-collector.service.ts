@@ -143,13 +143,13 @@ export class DataCollectorService {
                 public navCtrl: NavController) {
         this.collection = new BehaviorSubject<any>('data');
         this.getAllBooks();
+        this.getAllUsers();
     }
 
     syncUserBlock(uid, isLogin) {
         firebase.database().ref(`users/${uid}`).on('value', snapshot => {
             const user = snapshot.val();
             if (user.isActive) {
-                // debugger
                 const cu = firebase.auth().currentUser;
                 console.log('current user is: ', cu);
                 this.user = this.service.getUser();
@@ -157,13 +157,6 @@ export class DataCollectorService {
                     this.service.setUser(user);
                     this.navCtrl.navigateForward(['/tabs']);
                 }
-                // else if (!this.user && cu) {
-                //     this.navCtrl.navigateRoot(['']);
-                //     // this.service.setUser(snapshot.val());
-                //     // this.navCtrl.navigateForward(['/tabs']);
-                // } else {
-                //     // this.navCtrl.navigateRoot(['']);
-                // }
             } else {
                 this.utils.presentToast('Your account have been blocked due to misuse. You can contact us here awais.bsse3352@iiu.edu.pk Thanks');
                 this.service.logOutFromFirebase();
@@ -174,7 +167,7 @@ export class DataCollectorService {
 
     getAllUsers() {
         firebase.database().ref('users').on('value', snapshot => {
-            this.books = [];
+            this.users = [];
             snapshot.forEach((node) => {
                 const user = node.val();
                 this.users.push(user);
@@ -218,5 +211,9 @@ export class DataCollectorService {
             });
             this.setValue('books');
         });
+    }
+
+    getUserById(uid) {
+        return this.users.filter(user => user.uid === uid)[0];
     }
 }

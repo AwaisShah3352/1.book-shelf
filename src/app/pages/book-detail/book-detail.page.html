@@ -12,18 +12,18 @@
   <ion-row class="ion-justify-content-center">
     <ion-col size="12" class="py-0">
       <ion-card class="withdrawCard">
-        <ion-img src="{{book?.image || 'assets/books/1.jpeg'}}"></ion-img>
+        <ion-img class="book-img" src="{{book?.image || 'assets/books/1.jpeg'}}"></ion-img>
         <ion-card-header>
           <ion-card-title style="text-transform: capitalize;"><b>{{book?.name || 'Book Name'}}</b></ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-row style="margin: 0px 15px 0px -8px;">
             <ion-col size="2">
-              <ion-img src="assets/image.png"></ion-img>
+              <img class="profile-img" src="{{user?.profileImage || 'assets/image.png'}}"/>
             </ion-col>
-            <ion-col size="8">
-              <h4><b>Muhammad Ahmed</b></h4>
-              <p>+923401111111</p>
+            <ion-col style="padding-left: 15px;" size="8">
+              <h4><b>{{user?.fullName || 'user name'}}</b></h4>
+              <p>{{user?.phone || +923401111111}}</p>
             </ion-col>
             <ion-col size="2">
               <ion-icon (click)="openChat(book?.name, book.uid)" size="large" name="mail" color="success"></ion-icon>
@@ -57,9 +57,10 @@
             </ion-col>
           </ion-row>
           <p *ngIf="!book.originalCost > 0" style="color: #2dd36f">Rs.0</p>
-          <p>{{book?.city || ""}}</p>
-          <p>For {{book?.purpose}}</p>
-          <ion-row>
+          <p><b>City: </b>{{book?.city || ""}}</p>
+          <p><b>For: </b>{{book?.purpose || ""}}</p>
+          <p><b>Address: </b>{{user?.address || ""}}</p>
+          <ion-row style="margin-top: 15px;">
             <ion-col size="12">
               <ion-item lines="none" class="item">
                 <p>Summary</p>
