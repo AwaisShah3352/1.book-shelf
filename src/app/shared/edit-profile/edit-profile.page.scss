@@ -4,6 +4,22 @@ ion-content {
   --padding-bottom: 1em;
   --color: var(--ion-color-dark);
 
+  .info-card {
+    margin: 10px 0px 10px 0px;
+    box-shadow: none;
+    border-radius: 7px;
+    height: 50px;
+  }
+
+  .city-card {
+    margin: 10px 0px 10px 0px;
+    box-shadow: none;
+    border-radius: 7px;
+    height: 60px;
+    color: black;
+    padding: 5px;
+  }
+
   .userImg {
     height: 100px;
     width: 100px;

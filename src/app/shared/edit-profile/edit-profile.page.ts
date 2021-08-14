@@ -3,6 +3,7 @@ import {UserService} from '../../services/user.service';
 import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 import * as firebase from 'firebase';
 import {AlertController, LoadingController, NavController} from '@ionic/angular';
+import {DataCollectorService} from '../../services/data-collector.service';
 
 @Component({
     selector: 'app-edit-profile',
@@ -19,9 +20,12 @@ export class EditProfilePage implements OnInit {
                 private camera: Camera,
                 private loadingCtrl: LoadingController,
                 private navCtrl: NavController,
+                private dataCollector: DataCollectorService,
                 private alertCtrl: AlertController) {
         this.user = this.service.getUser();
     }
+
+    cities = this.dataCollector.cities;
 
     ngOnInit() {
     }
@@ -169,5 +173,46 @@ export class EditProfilePage implements OnInit {
                 console.log(err);
                 this.loading.dismiss();
             });
+    }
+
+    async getAddress() {
+        const [alert] = await Promise.all([this.alertCtrl.create({
+            cssClass: 'my-custom-class',
+            header: 'Edit Your Address!',
+            inputs: [
+                {
+                    name: `address`,
+                    type: 'text',
+                    value: this.user.address ? this.user.address : '',
+                    placeholder: 'Address...'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: () => {
+                        console.log('Confirm Cancel');
+                    }
+                }, {
+                    text: 'Ok',
+                    handler: (alertData) => {
+                        this.user.address = alertData.address;
+                        this.updateUser();
+                    }
+                }
+            ]
+        })]);
+        await alert.present();
+    }
+
+    async getCity() {
+    }
+
+    changeCity(event: any) {
+        const city = event.detail.value;
+        this.user.city = city;
+        console.log(event.detail.value);
     }
 }

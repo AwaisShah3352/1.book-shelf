@@ -23,34 +23,59 @@
         <ion-col size="3"></ion-col>
     </ion-row>
 
-    <ion-card class="itemCont">
-        <ion-card>
-            <ion-item lines="none">
-                <div style="padding-right: 10px">
-                    <ion-icon color="primary" slot="start" name="person"></ion-icon>
-                </div>
-                <ion-label>{{user?.fullName}}</ion-label>
-                <ion-icon (click)="getName()" color="primary" slot="end" name="pencil-sharp"></ion-icon>
-            </ion-item>
-        </ion-card>
-        <ion-card>
-            <ion-item lines="none">
-                <div style="padding-right: 10px">
-                    <ion-icon color="primary" slot="start" name="phone-portrait"></ion-icon>
-                </div>
-                <ion-label>{{user?.phone || '+92304444444'}}</ion-label>
-                <ion-icon color="primary" (click)="getPhone()" slot="end" name="pencil-sharp"></ion-icon>
-            </ion-item>
-        </ion-card>
-        <ion-card>
-            <ion-item lines="none">
-                <div style="color: #2dd36f; padding-right: 10px">
-                    <ion-icon color="primary" slot="start" name="mail"></ion-icon>
-                </div>
-                <ion-label>{{user?.email}}</ion-label>
-            </ion-item>
-        </ion-card>
-    </ion-card>
+    <ion-row class="ion-justify-content-center">
+        <ion-col size="11">
+            <ion-card class="info-card">
+                <ion-item lines="none">
+                    <div style="padding-right: 10px">
+                        <ion-icon color="primary" slot="start" name="person"></ion-icon>
+                    </div>
+                    <ion-label>{{user?.fullName}}</ion-label>
+                    <ion-icon (click)="getName()" color="primary" slot="end" name="pencil-sharp"></ion-icon>
+                </ion-item>
+            </ion-card>
+            <ion-card class="info-card">
+                <ion-item lines="none">
+                    <div style="padding-right: 10px">
+                        <ion-icon color="primary" slot="start" name="phone-portrait"></ion-icon>
+                    </div>
+                    <ion-label>{{user?.phone || '+92304444444'}}</ion-label>
+                    <ion-icon color="primary" (click)="getPhone()" slot="end" name="pencil-sharp"></ion-icon>
+                </ion-item>
+            </ion-card>
+            <ion-card class="info-card">
+                <ion-item lines="none">
+                    <div style="padding-right: 10px">
+                        <ion-icon color="primary" slot="start" name="phone-portrait"></ion-icon>
+                    </div>
+                    <ion-label>{{user?.address || 'dummy address'}}</ion-label>
+                    <ion-icon color="primary" (click)="getAddress()" slot="end" name="pencil-sharp"></ion-icon>
+                </ion-item>
+            </ion-card>
+            <ion-card class="city-card">
+                <ion-row>
+                    <ion-col size="2">
+                        <div style="padding-right: 10px">
+                            <ion-icon style="margin-top: 10px; height: 25px; width: 23px;" color="primary" slot="start" name="locate"></ion-icon>
+                        </div>
+                    </ion-col>
+                    <ion-col size="10">
+                        <ion-select (ionChange)="changeCity($event)" value="{{user.city}}" class="select" placeholder="select city">
+                            <ion-select-option *ngFor="let city of cities">{{city}}</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+            <ion-card class="info-card">
+                <ion-item lines="none">
+                    <div style="color: #2dd36f; padding-right: 10px">
+                        <ion-icon color="primary" slot="start" name="mail"></ion-icon>
+                    </div>
+                    <ion-label>{{user?.email}}</ion-label>
+                </ion-item>
+            </ion-card>
+        </ion-col>
+    </ion-row>
     <ion-row class="ion-justify-content-center">
         <ion-col class="itemCont" size="11">
             <ion-button (click)="updateUser()" expand="block">Save</ion-button>
