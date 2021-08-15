@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user';
 import * as firebase from 'firebase';
-import {LoadingController, NavController} from '@ionic/angular';
+import {NavController} from '@ionic/angular';
 import {UtilsService} from './utils.service';
 
 @Injectable({
@@ -18,7 +18,6 @@ export class UserService {
     user: User;
     allUsers: any = [];
 
-    loading: any;
     setUser(user: any) {
         this.user = user;
         localStorage.setItem('user', JSON.stringify(this.user));
@@ -44,15 +43,11 @@ export class UserService {
         firebase.auth().signOut().then((res) => {
             localStorage.clear();
             console.log(localStorage);
-            if (this.loading) {
-                this.loading.dismiss();
-            }
+            this.utils.stopLoading();
             this.navCtrl.navigateRoot(['']);
         }).catch((error) => {
             alert(error);
-            if (this.loading) {
-                this.loading.dismiss();
-            }
+            this.utils.stopLoading();
         });
     }
 }

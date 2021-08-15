@@ -4,7 +4,8 @@ import {Subscription} from 'rxjs';
 import * as firebase from 'firebase';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
-import {LoadingController, NavController} from '@ionic/angular';
+import {NavController} from '@ionic/angular';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-change-password',
@@ -16,13 +17,12 @@ export class ChangePasswordPage implements OnInit {
   changePasswordForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
               private navCtrl: NavController,
-              private loadingCtrl: LoadingController,
+              private utils: UtilsService,
               private service: UserService) {
-    this.user = service.getUser();
+    this.user = this.service.getUser();
   }
   passwordType = 'password';
   passwordIcon = 'eye-off';
-  loading: any;
 
   user: User;
   ngOnInit() {
@@ -45,40 +45,26 @@ export class ChangePasswordPage implements OnInit {
   }
 
   async changePassword() {
-    this.loading = await this.loadingCtrl.create({
-      message: 'please wait...'
-    });
-    this.loading.present();
+    this.utils.presentLoading('Loading...');
     const oldPassword = this.changePasswordForm.value.oldPassword;
     const newPassword = this.changePasswordForm.value.password;
     const email = this.user.email;
     firebase.auth().signInWithEmailAndPassword(email, oldPassword).then(() => {
       this.updatePassword(newPassword);
-      if (this.loading) {
-        this.loading.dismiss();
-      }
+      this.utils.stopLoading();
     }).catch((err) => {
-      if (this.loading) {
-        this.loading.dismiss();
-      }
+      this.utils.stopLoading();
       alert(err);
     });
   }
 
   async updatePassword(newPassword) {
-    this.loading = await this.loadingCtrl.create({
-      message: 'please wait...'
-    });
-    this.loading.present();
+    
     firebase.auth().currentUser.updatePassword(newPassword).then(() => {
       this.navCtrl.navigateRoot(['tabs/tab2']);
-      if (this.loading) {
-        this.loading.dismiss();
-      }
+      this.utils.stopLoading();
     }).catch((err) => {
-      if (this.loading) {
-        this.loading.dismiss();
-      }
+      this.utils.stopLoading();
       alert(err);
     });
   }

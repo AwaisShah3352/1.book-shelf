@@ -15,14 +15,12 @@ export class AddUserPage implements OnInit {
     constructor(private formBuilder: FormBuilder,
                 private navCtrl: NavController,
                 private utils: UtilsService,
-                private loadingCtrl: LoadingController,
     ) {
     }
 
     addUserForm: FormGroup;
     passwordType = 'password';
     passwordIcon = 'eye-off';
-    loading: any;
     roles = ['Teacher', 'Student'];
     isStudent = false;
     isTeacher = false;
@@ -53,32 +51,21 @@ export class AddUserPage implements OnInit {
     }
 
     async addUser() {
-        this.loading = await this.loadingCtrl.create({
-            message: 'please wait...'
-        });
-        this.loading.present();
+        this.utils.presentLoading('Loading...');
         const formData = this.addUserForm.value;
         firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password).then(res => {
             this.saveUserInRealTime(res.user.uid, res.user.email);
             const auth = firebase.auth().currentUser;
             console.log(res);
             this.navCtrl.back();
-            if (this.loading) {
-                this.loading.dismiss();
-            }
+            this.utils.stopLoading();
         }).catch(err => {
-            if (this.loading) {
-                this.loading.dismiss();
-            }
-            console.log(err);
+            this.utils.stopLoading();
         });
     }
 
     async saveUserInRealTime(uId, mail) {
-        this.loading = await this.loadingCtrl.create({
-            message: 'please wait...'
-        });
-        this.loading.present();
+        this.utils.presentLoading('Loading...');
         const formData = this.addUserForm.value;
         this.decideRole(formData.role);
         firebase.database().ref(`users/${uId}`).set({
@@ -92,10 +79,10 @@ export class AddUserPage implements OnInit {
             isTeacher: this.isTeacher,
             enable: true,
             phone: '0' + formData.phone,
-        }).then(res => this.utils.presentToast('User have been created successfully...'));
-        if (this.loading) {
-            this.loading.dismiss();
-        }
+        }).then(res => {
+            this.utils.presentToast('User have been created successfully...');
+            this.utils.stopLoading();
+        });
     }
 
     mismatchedPasswords(otherControlName: string) {

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
-import {LoadingController, NavController} from '@ionic/angular';
+import {NavController} from '@ionic/angular';
 import * as firebase from 'firebase';
+import { UtilsService } from 'src/app/services/utils.service';
 @Component({
     selector: 'app-forget-password',
     templateUrl: './forget-password.page.html',
@@ -10,9 +11,8 @@ import * as firebase from 'firebase';
 export class ForgetPasswordPage implements OnInit {
 
     resetForm: FormGroup;
-    loading: any;
     constructor(private formBuilder: FormBuilder,
-                private loadingCtrl: LoadingController,
+                private utils: UtilsService,
                 private navCtrl: NavController) {
     }
 
@@ -28,23 +28,15 @@ export class ForgetPasswordPage implements OnInit {
     }
 
     async resetPassword() {
-      this.loading = await this.loadingCtrl.create({
-        message: 'please wait...'
-      });
-      this.loading.present();
+      this.utils.presentLoading('Loading...');
       const email = this.resetForm.value.email;
       firebase.auth().sendPasswordResetEmail(email).then(res => {
         alert('Password reset email sent, please check email...');
         this.navCtrl.navigateRoot(['']);
-        if (this.loading) {
-          this.loading.dismiss();
-        }
+        this.utils.stopLoading();
         console.log('res: ', res);
       }).catch(err => {
-        console.log(err);
-        if (this.loading) {
-          this.loading.dismiss();
-        }
+        this.utils.stopLoading();
       });
     }
 }

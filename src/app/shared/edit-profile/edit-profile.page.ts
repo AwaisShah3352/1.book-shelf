@@ -4,6 +4,7 @@ import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 import * as firebase from 'firebase';
 import {AlertController, LoadingController, NavController} from '@ionic/angular';
 import {DataCollectorService} from '../../services/data-collector.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
     selector: 'app-edit-profile',
@@ -12,14 +13,12 @@ import {DataCollectorService} from '../../services/data-collector.service';
 })
 export class EditProfilePage implements OnInit {
     user: any;
-    loading: any;
     show = false;
     base64Image: any;
 
-    constructor(private service: UserService,
+    constructor(private utils: UtilsService,
+                private service: UserService,
                 private camera: Camera,
-                private loadingCtrl: LoadingController,
-                private navCtrl: NavController,
                 private dataCollector: DataCollectorService,
                 private alertCtrl: AlertController) {
         this.user = this.service.getUser();
@@ -69,10 +68,7 @@ export class EditProfilePage implements OnInit {
     }
 
     async uploadImageInFireStorage(image) {
-        this.loading = await this.loadingCtrl.create({
-            message: 'please wait...'
-        });
-        this.loading.present();
+        this.utils.presentLoading('Loading...');
         const name: string = Date.now().toString() + '.jpg';
         firebase.storage().ref(`/profileImages/${name}`)
             .putString(image, firebase.storage.StringFormat.DATA_URL).then((snapshot) => {
@@ -80,7 +76,7 @@ export class EditProfilePage implements OnInit {
                 .getDownloadURL().then(urL => {
                 this.user.profileImage = urL;
                 this.updateUserInFirebase();
-                this.loading.dismiss();
+                this.utils.stopLoading();
             }).catch(err => alert(err));
         }).catch(err => alert(err));
     }
@@ -159,19 +155,14 @@ export class EditProfilePage implements OnInit {
     }
 
     async updateUserInFirebase() {
-        this.loading = await this.loadingCtrl.create({
-            message: 'please wait...'
-        });
-        this.loading.present();
+        this.utils.presentLoading('Loading...');
         firebase.database().ref(`users/${this.user.uid}`).set(this.user)
             .then(res => {
-                console.log(res);
-                this.loading.dismiss();
+                this.utils.stopLoading();
                 this.service.setUser(this.user);
             })
             .catch(err => {
-                console.log(err);
-                this.loading.dismiss();
+                this.utils.stopLoading();
             });
     }
 

@@ -11,13 +11,11 @@ import {UtilsService} from '../services/utils.service';
 export class UserDetailPage implements OnInit {
 
     user: any;
-    loading: any;
     show = false;
     phone: any;
     phoneUpdated = false;
 
-    constructor(private loadingCtrl: LoadingController,
-                private navCtrl: NavController,
+    constructor(private navCtrl: NavController,
                 private utils: UtilsService,
                 private alertCtrl: AlertController) {
         this.user = JSON.parse(localStorage.getItem('detailUser'));
@@ -92,20 +90,16 @@ export class UserDetailPage implements OnInit {
     }
 
     async updateUser() {
-        this.loading = await this.loadingCtrl.create({
-            message: 'please wait...'
-        });
-        this.loading.present();
+        this.utils.presentLoading('Loading...');
         firebase.database().ref(`users/${this.user.uid}`).set(this.user)
             .then(res => {
                 console.log(res);
-                this.loading.dismiss();
+                this.utils.stopLoading();
                 this.utils.presentToast('User have been updated successfully...');
                 this.navCtrl.back();
             })
             .catch(err => {
-                console.log(err);
-                this.loading.dismiss();
+                this.utils.stopLoading();
             });
     }
 
