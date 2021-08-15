@@ -16,7 +16,7 @@
 <ion-content>
     <ion-row style="margin: 0px 6px 0px 6px;">
         <ion-col size="12" class="py-0" *ngFor="let book of searchedBooks; index as i">
-            <div (click)="openDetail(book)" >
+            <div *ngIf="book.status === 'pending'" (click)="openDetail(book)" >
                 <img class="image" src="{{book?.image || 'assets/books/1.jpeg'}}"/>
                 <ion-card-header style="padding: 10px;">
                     <ion-label>{{book?.name || 'Book Name'}}</ion-label>
@@ -33,8 +33,8 @@
                     <p>{{book?.city || ""}}</p>
                     <p>For {{book?.purpose}}</p>
                 </ion-card-header>
+                <div class="line"></div>
             </div>
-            <div class="line"></div>
         </ion-col>
     </ion-row>
 </ion-content>

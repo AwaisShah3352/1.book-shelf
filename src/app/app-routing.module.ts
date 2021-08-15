@@ -39,18 +39,6 @@ const routes: Routes = [
     loadChildren: () => import('./shared/terms/terms.module').then( m => m.TermsPageModule)
   },
   {
-    path: 'admin-channels',
-    loadChildren: () => import('./admin/channels/channels.module').then( m => m.ChannelsPageModule)
-  },
-  {
-    path: 'admin-chat',
-    loadChildren: () => import('./admin/admin-chat/admin-chat.module').then( m => m.AdminChatPageModule)
-  },
-  {
-    path: 'add-user',
-    loadChildren: () => import('./add-user/add-user.module').then( m => m.AddUserPageModule)
-  },
-  {
     path: 'user-detail',
     loadChildren: () => import('./user-detail/user-detail.module').then( m => m.UserDetailPageModule)
   },

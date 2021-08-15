@@ -203,10 +203,10 @@ export class DataCollectorService {
             snapshot.forEach((node) => {
                 const book = node.val();
                 book.show = false;
-                if (book.purpose === 'Donation') {
-                    this.myDonatedBooks.push(book);
-                } else {
+                if (book.purpose === 'Borrow/Req') {
                     this.myRequiredBooks.push(book);
+                } else {
+                    this.myDonatedBooks.push(book);
                 }
             });
             this.setValue('books');

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LoadingController, NavController} from '@ionic/angular';
 
+// ...
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {NavController} from '@ionic/angular';
 import * as firebase from 'firebase';
 import {UserService} from '../../services/user.service';
 import {UtilsService} from '../../services/utils.service';
@@ -44,11 +45,6 @@ export class LoginPage implements OnInit {
     async login() {
         this.utils.presentLoading('please wait...');
         const formData = this.loginForm.value;
-        // const user = this.service.getUser();
-        // if (user) {
-        //     this.navCtrl.navigateForward(['/tabs']);
-        // } else {
-        // }
         firebase.auth().signInWithEmailAndPassword(formData.email, formData.password).then(res => {
             console.log(res);
             if (res.user.emailVerified) {

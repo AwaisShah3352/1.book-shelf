@@ -72,14 +72,6 @@ export class Tab3Page {
                     }
                 },
                 {
-                    text: 'Help Desk',
-                    icon: 'mail',
-                    cssClass: 'primary',
-                    handler: () => {
-                        this.navCtrl.navigateForward(['/admin-chat']);
-                    }
-                },
-                {
                     text: 'Change Password',
                     icon: 'lock-closed',
                     cssClass: 'primary',

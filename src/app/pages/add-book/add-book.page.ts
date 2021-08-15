@@ -106,7 +106,7 @@ export class AddBookPage implements OnInit {
     async addBook() {
         this.utils.presentLoading('please wait...');
         const data = this.bookForm.value;
-        if (this.isFree === true && data.purpose === 'Required' || data.purpose === 'Donation') {
+        if (this.isFree === true && data.purpose === 'Borrow/Req' || data.purpose === 'Donate') {
             data.price = 0;
         }
         const name: string = Date.now().toString() + '.jpg';
@@ -138,6 +138,7 @@ export class AddBookPage implements OnInit {
             purpose: data.purpose,
             summary: data.summary,
             bookKey: key,
+            status: 'pending',
             uid: this.user.uid,
             city: this.user.city,
             originalCost: data.originalCost,

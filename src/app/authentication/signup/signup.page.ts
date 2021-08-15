@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import * as firebase from 'firebase';
-import {LoadingController, NavController} from '@ionic/angular';
+import {NavController} from '@ionic/angular';
 import {UtilsService} from '../../services/utils.service';
 import {DataCollectorService} from '../../services/data-collector.service';
 
@@ -15,9 +15,7 @@ export class SignupPage implements OnInit {
     constructor(private formBuilder: FormBuilder,
                 private navCtrl: NavController,
                 private utils: UtilsService,
-                public dataCollector: DataCollectorService,
-                private loadingCtrl: LoadingController
-    ) {
+                public dataCollector: DataCollectorService) {
     }
 
     cities = this.dataCollector.cities;

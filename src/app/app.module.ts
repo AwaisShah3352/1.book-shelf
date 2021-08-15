@@ -5,13 +5,14 @@ import {RouteReuseStrategy} from '@angular/router';
 import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
+
+// ...
 import {Camera} from '@ionic-native/camera/ngx';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {EmailComposer} from '@ionic-native/email-composer/ngx';
 import * as firebase from 'firebase';
 import {HttpClientModule} from '@angular/common/http';
-import {ChartsModule} from 'ng2-charts';
 import {AppLauncher} from '@ionic-native/app-launcher/ngx';
 
 const firebaseConfig = {
@@ -31,7 +32,6 @@ firebase.initializeApp(firebaseConfig);
     entryComponents: [],
     imports: [BrowserModule,
         HttpClientModule,
-        ChartsModule,
         IonicModule.forRoot(), AppRoutingModule],
     providers: [
         StatusBar,

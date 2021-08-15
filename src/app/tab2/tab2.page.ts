@@ -109,6 +109,15 @@ export class Tab2Page implements OnInit {
                     }
                 },
                 {
+                    text: 'Update status',
+                    icon: 'list',
+                    cssClass: 'primary',
+                    handler: () => {
+                        this.reviewService.bookKey = book.bookKey;
+                        this.navCtrl.navigateForward(['/reviews']);
+                    }
+                },
+                {
                     text: 'Cancel',
                     icon: 'backspace',
                     cssClass: 'primary',
