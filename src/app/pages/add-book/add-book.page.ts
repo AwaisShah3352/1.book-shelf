@@ -164,7 +164,9 @@ export class AddBookPage implements OnInit {
             purpose: data.purpose,
             summary: data.summary,
             bookKey: key,
+            status: 'pending',
             uid: this.user.uid,
+            city: this.user.city,
             originalCost: data.originalCost,
             deprecatedCost: data.deprecatedCost,
         }).then(res => {
